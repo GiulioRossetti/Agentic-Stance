@@ -1,0 +1,9 @@
+ghost-kg @ git+https://github.com/GiulioRossetti/GhostKG
+python-dotenv>=1.0.0
+pandas>=2.0.0
+numpy>=1.24.0
+matplotlib>=3.7.0
+ollama>=0.2.0
+anthropic>=0.25.0
+openai>=1.20.0
+groq>=0.5.0
