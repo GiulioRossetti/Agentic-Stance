@@ -314,7 +314,7 @@ LLM_MAX_TOKENS=512
 LLM_TEMPERATURE=0.7
 LLM_TOP_P=0.95
 LLM_MAX_CONCURRENCY=8        # per-process request concurrency for batch-aware providers
-PARALLEL_EXCHANGE_JOBS=1     # helper knob for explicit multi-exchange orchestration
+PARALLEL_EXCHANGE_JOBS=1     # >1 activates the disjoint-exchange scheduler
 
 # Simulation
 TOPIC=immigration policy
@@ -420,7 +420,17 @@ python src/simulation.py
 
 #### 3. Parallel exchange jobs
 
-For independent exchange workloads outside the main sequential simulation loop, use `run_exchange_jobs()`:
+Set `PARALLEL_EXCHANGE_JOBS` above `1` to activate the disjoint-exchange scheduler:
+
+```bash
+LLM_PROVIDER=vllm \
+LLM_MODEL=meta-llama/Llama-3.1-8B-Instruct \
+LLM_BASE_URL=http://127.0.0.1:8000/v1 \
+PARALLEL_EXCHANGE_JOBS=4 \
+python src/simulation.py
+```
+
+For independent exchange workloads outside the main simulation loop, use `run_exchange_jobs()` directly:
 
 ```python
 import asyncio
